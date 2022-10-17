@@ -1,14 +1,16 @@
 package com.mygame.ballgame;
 
 import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.utils.ScreenUtils;
 
 public class BallGame extends ApplicationAdapter {
 
 	ShapeRenderer shape;
+	int x = 50;
+	int y = 50;
+	int xSpeed = 5;
 
 	@Override
 	public void create() {
@@ -17,9 +19,18 @@ public class BallGame extends ApplicationAdapter {
 
 	@Override
 	public void render() {
+		Gdx.gl.glClear((GL20.GL_COLOR_BUFFER_BIT));
+
 		shape.begin(ShapeRenderer.ShapeType.Filled);
-		shape.circle(50,50,50);
-		shape.setColor(1,0.7f,0,1);
+		shape.circle(x,y,50);
 		shape.end();
+
+		x += xSpeed;
+		if (x > Gdx.graphics.getWidth()) {
+			xSpeed = -5;
+		}
+		if (x < 0) {
+			xSpeed = 5;
+		}
 	}
 }
