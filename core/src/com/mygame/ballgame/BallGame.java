@@ -7,30 +7,23 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class BallGame extends ApplicationAdapter {
 
-	ShapeRenderer shape;
-	int x = 50;
-	int y = 50;
-	int xSpeed = 5;
+    ShapeRenderer shape;
+    Ball ball;
 
-	@Override
-	public void create() {
-		shape = new ShapeRenderer();
-	}
 
-	@Override
-	public void render() {
-		Gdx.gl.glClear((GL20.GL_COLOR_BUFFER_BIT));
 
-		shape.begin(ShapeRenderer.ShapeType.Filled);
-		shape.circle(x,y,50);
-		shape.end();
+    @Override
+    public void create() {
+        shape = new ShapeRenderer();
+        ball = new Ball(250, 150, 20, 5, 5);
+    }
 
-		x += xSpeed;
-		if (x > Gdx.graphics.getWidth()) {
-			xSpeed = -5;
-		}
-		if (x < 0) {
-			xSpeed = 5;
-		}
-	}
+    @Override
+    public void render() {
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        shape.begin(ShapeRenderer.ShapeType.Filled);
+        ball.update();
+        ball.draw(shape);
+        shape.end();
+    }
 }
