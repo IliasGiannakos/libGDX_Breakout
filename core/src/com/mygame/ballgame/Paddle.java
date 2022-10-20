@@ -18,12 +18,12 @@ public class Paddle {
     }
 
     public void update() {
-        x = Gdx.input.getX();
-        if (x - width / 2 < 0) {
-            x = x-width/2;
+        x = Gdx.input.getX()-width/2;
+        if (x   < 0) {
+            x = 0;
         }
-        if (x+width/2 > Gdx.graphics.getWidth()) {
-            x = x+width/2;
+        if (x + width  >= Gdx.graphics.getWidth()) {
+            x = Gdx.graphics.getWidth()-width;
         }
     }
 
