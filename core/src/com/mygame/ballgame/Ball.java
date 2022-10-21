@@ -4,14 +4,16 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
-public class Ball {
+public class Ball  {
 
     int x;
     int y;
     int size;
     int xSpeed;
     int ySpeed;
+
     Color color = Color.WHITE;
+
 
 //    ball obj constructor
     public Ball(int x, int y, int size, int xSpeed, int ySpeed) {
@@ -36,6 +38,7 @@ public class Ball {
     public void draw(ShapeRenderer shape) {
         shape.setColor(color);
         shape.circle(x, y, size);
+        //shape.rect(x-size,y-size,size*2,size*2); //ballHitbox
     }
 
     public void checkCollision(Paddle paddle) {
@@ -47,7 +50,12 @@ public class Ball {
     }
 
     private boolean collidesWith(Paddle paddle) {
-        return Math.random()>.5;
+        if (paddle.x + paddle.width >= x - size && paddle.x <= x + size && paddle.y <= y + size && paddle.y + paddle.height >= y - size) {
+            return true;
+        } else {
+            return false;
+        }
     }
+
 
 }

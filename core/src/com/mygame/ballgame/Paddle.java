@@ -2,8 +2,9 @@ package com.mygame.ballgame;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Rectangle;
 
-public class Paddle {
+public class Paddle extends Rectangle {
 
     int x;
     int y;
@@ -19,6 +20,7 @@ public class Paddle {
 
     public void update() {
         x = Gdx.input.getX()-width/2;
+        y = Gdx.graphics.getHeight() - Gdx.input.getY();
         if (x   < 0) {
             x = 0;
         }
