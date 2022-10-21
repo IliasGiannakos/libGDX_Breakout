@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
-public class Ball  {
+public class Ball {
 
     int x;
     int y;
@@ -12,10 +12,11 @@ public class Ball  {
     int xSpeed;
     int ySpeed;
 
+
     Color color = Color.WHITE;
 
 
-//    ball obj constructor
+    //    ball obj constructor
     public Ball(int x, int y, int size, int xSpeed, int ySpeed) {
         this.x = x;
         this.y = y;
@@ -27,11 +28,12 @@ public class Ball  {
     public void update() {
         x += xSpeed;
         y += ySpeed;
-        if (x -size < 0 || x + size > Gdx.graphics.getWidth()) {
+        if (x - size < 0 || x + size > Gdx.graphics.getWidth()) {
             xSpeed = -xSpeed;
         }
-        if (y - size < 0 || y + size > Gdx.graphics.getHeight()) {
+        if ( y + size > Gdx.graphics.getHeight()) {
             ySpeed = -ySpeed;
+
         }
     }
 
@@ -43,14 +45,27 @@ public class Ball  {
 
     public void checkCollision(Paddle paddle) {
         if (collidesWith(paddle)) {
-            color = Color.GREEN;
-        } else {
-            color = Color.WHITE;
+            ySpeed = -ySpeed;
+        }
+    }
+
+    public void checkCollision(Block block) {
+        if (collidesWith(block)) {
+           block.destroyed = true;
+            ySpeed = -ySpeed;
         }
     }
 
     private boolean collidesWith(Paddle paddle) {
         if (paddle.x + paddle.width >= x - size && paddle.x <= x + size && paddle.y <= y + size && paddle.y + paddle.height >= y - size) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean collidesWith(Block block) {
+        if (block.x + block.width >= x - size && block.x <= x + size && block.y <= y + size && block.y + block.height >= y - size) {
             return true;
         } else {
             return false;

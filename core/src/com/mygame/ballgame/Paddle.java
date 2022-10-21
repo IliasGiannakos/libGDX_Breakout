@@ -20,7 +20,7 @@ public class Paddle extends Rectangle {
 
     public void update() {
         x = Gdx.input.getX()-width/2;
-        y = Gdx.graphics.getHeight() - Gdx.input.getY();
+
         if (x   < 0) {
             x = 0;
         }
