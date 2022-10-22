@@ -11,6 +11,7 @@ public class Ball {
     int size;
     int xSpeed;
     int ySpeed;
+    public boolean outOfBounds = false;
 
 
     Color color = Color.WHITE;
@@ -33,14 +34,16 @@ public class Ball {
         }
         if ( y + size > Gdx.graphics.getHeight()) {
             ySpeed = -ySpeed;
-
+        }
+        if (y + size < 0) {
+            outOfBounds = true;
         }
     }
 
     public void draw(ShapeRenderer shape) {
         shape.setColor(color);
         shape.circle(x, y, size);
-        //shape.rect(x-size,y-size,size*2,size*2); //ballHitbox
+
     }
 
     public void checkCollision(Paddle paddle) {
